@@ -112,4 +112,9 @@ public class CalculatorSteps {
 		assertEquals(val, c.eval(op));
 	}
 
+	@Then("the operation should return Integer maximum value")
+	public void thenTheOperationFailedWithAnArithmeticException() {
+		assertEquals(Integer.MAX_VALUE, c.eval(op));
+	}
+
 }
