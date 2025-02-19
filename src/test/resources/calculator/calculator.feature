@@ -97,3 +97,18 @@ Feature: Integer Arithmetic Expressions
       | "-" | 8| 5|     3|
       | "*" | 7| 2|    14|
       | "/" | 6| 2|     3|
+
+  Scenario Outline: Testing the output notation
+    Given an integer operation "<op>"
+    When I provide a first number 8
+    And I provide a second number 6
+    Then its INFIX notation is ( 8 <op> 6 )
+    And its PREFIX notation is <op> (8, 6)
+    And its POSTFIX notation is (8, 6) <op>
+    Examples:
+      | op |
+      | + |
+      | - |
+      | * |
+      | / |
+
