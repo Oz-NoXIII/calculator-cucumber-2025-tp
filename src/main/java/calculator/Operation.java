@@ -1,5 +1,6 @@
 package calculator;
 
+import visitor.Printer;
 import visitor.Visitor;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public abstract class Operation implements Expression
    * The notation used to render operations as strings.
    * By default, the infix notation will be used.
    */
-  public Notation notation = Notation.INFIX;
+  public Printer p;
 
   /** It is not allowed to construct an operation with a null list of expressions.
    * Note that it is allowed to have an EMPTY list of arguments.
@@ -45,7 +46,7 @@ public abstract class Operation implements Expression
   protected /*constructor*/ Operation(List<Expression> elist)
 		  throws IllegalConstruction
 	{
-		this(elist, null);
+		this(elist, Notation.INFIX);
     }
 
 	/** To construct an operation with a list of expressions as arguments,
@@ -58,12 +59,19 @@ public abstract class Operation implements Expression
 	protected /*constructor*/ Operation(List<Expression> elist,Notation n)
 			throws IllegalConstruction
 	{
+		p = new Printer();
 		if (elist == null) {
 			throw new IllegalConstruction(); }
 		else {
 			args = new ArrayList<>(elist);
 		}
-		if (n!=null) notation = n;
+		if(n != null){
+			p.setNotation(n);
+
+		}
+		else{
+			throw new IllegalConstruction();
+		}
 	}
 
 	/**
@@ -148,7 +156,7 @@ public abstract class Operation implements Expression
    */
   @Override
   public final String toString() {
-  	return toString(notation);
+  	return toString(p.getNotation());
   }
 
   /**
