@@ -18,7 +18,7 @@ class TestDivides {
 
 	@BeforeEach
 	void setUp() {
-		params = Arrays.asList(new MyNumber(value1), new MyNumber(value2), new MyNumber(value3));
+		params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
 		try {
 			op = new Divides(params);
 			op.notation = Notation.INFIX; // reset the notation to infix (which is the default) before each test
