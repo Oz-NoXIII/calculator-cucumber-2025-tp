@@ -12,17 +12,19 @@ class TestDivides {
 
 	private final int value1 = 8;
 	private final int value2 = 6;
+	private final int value3 = 0;
 	private Divides op;
 	private List<Expression> params;
 
 	@BeforeEach
 	void setUp() {
-		  params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
-		  try {
-		  	op = new Divides(params);
+		params = Arrays.asList(new MyNumber(value1), new MyNumber(value2), new MyNumber(value3));
+		try {
+			op = new Divides(params);
 			op.notation = Notation.INFIX; // reset the notation to infix (which is the default) before each test
-		  }
-		  catch(IllegalConstruction e) { fail(); }
+		} catch (IllegalConstruction e) {
+			fail();
+		}
 	}
 
 	@Test
@@ -49,14 +51,15 @@ class TestDivides {
 		try {
 			Divides d = new Divides(p, Notation.INFIX);
 			assertEquals(op, d);
+		} catch (IllegalConstruction e) {
+			fail();
 		}
-		catch(IllegalConstruction e) { fail(); }
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	@Test
 	void testNull() {
-		assertDoesNotThrow(() -> op==null); // Direct way to to test if the null case is handled.
+		assertDoesNotThrow(() -> op == null); // Direct way to to test if the null case is handled.
 	}
 
 	@Test
@@ -66,14 +69,21 @@ class TestDivides {
 		try {
 			Divides e = new Divides(p, Notation.INFIX);
 			assertEquals(e.hashCode(), op.hashCode());
+		} catch (IllegalConstruction e) {
+			fail();
 		}
-		catch(IllegalConstruction e) { fail(); }
 	}
 
 	@Test
 	void testNullParamList() {
 		params = null;
 		assertThrows(IllegalConstruction.class, () -> op = new Divides(params));
+	}
+
+	@Test //Ingrid
+	void testDivideByZero() {
+		// Division by zero should return Integer.MAX_VALUE
+		assertEquals(Integer.MAX_VALUE, op.op(value1, value3));
 	}
 
 }
