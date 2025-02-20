@@ -31,11 +31,16 @@ public abstract class Operation implements Expression
    */
   protected int neutral;
 
-  /**
+	public void setNotation(Notation notation) {
+		this.notation = notation;
+		this.accept(new Printer(notation));
+	}
+
+	/**
    * The notation used to render operations as strings.
    * By default, the infix notation will be used.
    */
-  public Printer p;
+  public Notation notation;
 
   /** It is not allowed to construct an operation with a null list of expressions.
    * Note that it is allowed to have an EMPTY list of arguments.
@@ -46,7 +51,7 @@ public abstract class Operation implements Expression
   protected /*constructor*/ Operation(List<Expression> elist)
 		  throws IllegalConstruction
 	{
-		this(elist, Notation.INFIX);
+		this(elist, null);
     }
 
 	/** To construct an operation with a list of expressions as arguments,
@@ -59,19 +64,12 @@ public abstract class Operation implements Expression
 	protected /*constructor*/ Operation(List<Expression> elist,Notation n)
 			throws IllegalConstruction
 	{
-		p = new Printer();
 		if (elist == null) {
 			throw new IllegalConstruction(); }
 		else {
 			args = new ArrayList<>(elist);
 		}
-		if(n != null){
-			p.setNotation(n);
-
-		}
-		else{
-			throw new IllegalConstruction();
-		}
+		if (n!=null) notation = n;
 	}
 
 	/**
@@ -156,7 +154,7 @@ public abstract class Operation implements Expression
    */
   @Override
   public final String toString() {
-  	return toString(p.getNotation());
+  	return toString(notation);
   }
 
   /**

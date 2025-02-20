@@ -136,8 +136,8 @@ Feature: Integer Arithmetic Expressions
       | 5 | 3 |
     And I provide a last number 5
     Then its INFIX notation is ( ( 3 <op2> 4 <op2> 5 ) <op> ( 5 <op3> 3 ) <op> 5 )
-    And its PREFIX notation is <op> ( <op2> ( 3, 4, 5 ), <op3> ( 5, 3 ) , 5 )
-    And its POSTFIX notation is ( ( 3, 4, 5) <op2>, ( 5, 3) <op3>, 5) <op>
+    And its PREFIX notation is <op> (<op2> (3, 4, 5), <op3> (5, 3), 5)
+    And its POSTFIX notation is ((3, 4, 5) <op2>, (5, 3) <op3>, 5) <op>
     Examples:
       | op | op2 | op3 |
       | /  |  +  |  - |

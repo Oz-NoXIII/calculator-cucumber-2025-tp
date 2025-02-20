@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import visitor.Printer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +15,7 @@ class TestNotation {
      */
 	void testNotation(String s,Operation o,Notation n) {
 		assertEquals(s, o.toString(n));
-		o.p.setNotation(n);
+		o.setNotation(n);
 		assertEquals(s, o.toString());
 	}
 
@@ -37,7 +36,6 @@ class TestNotation {
 		int value1 = 8;
 		int value2 = 6;
 		Operation op = null;
-		Printer p = new Printer();
 		//List<Expression> params = new ArrayList<>(Arrays.asList(new MyNumber(value1),new MyNumber(value2)));
 		List<Expression> params = Arrays.asList(new MyNumber(value1),new MyNumber(value2));
 		try {

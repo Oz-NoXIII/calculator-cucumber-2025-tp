@@ -1,36 +1,28 @@
 package visitor;
 
+import calculator.Expression;
+import calculator.MyNumber;
 import calculator.Notation;
+import calculator.Operation;
 
 /** Evaluation is a concrete visitor that serves to
  * compute and evaluate the results of arithmetic expressions.
  */
-public class Printer {
+public class Printer extends Visitor {
 
-    /**
-     * Default constructor of the class. Does not initialise anything.
-     */
-    public Printer() {
-        notation = Notation.INFIX;
+    public Notation notation;
+
+    public Printer(Notation notation) {
+        this.notation = notation;
     }
 
-    /** The unique Notation */
-    private Notation notation;
-
-    /**
-     * Get the Notation used by the Visitor
-     * @return Notation type
-     */
-    public Notation getNotation(){
-        return notation;
+    @Override
+    public void visit(MyNumber n) {
+        return;
     }
 
-    /**
-     * Get the Notation used by the Visitor
-     * @param n Notation to change
-     */
-    public void setNotation(Notation n){
-        notation = n;
+    @Override
+    public void visit(Operation o) {
+        o.notation = notation;
     }
-
 }
