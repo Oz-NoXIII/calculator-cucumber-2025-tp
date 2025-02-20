@@ -42,10 +42,15 @@ public final class Divides extends Operation
 
     /**
      * The actual computation of the (binary) arithmetic division of two integers
+     *
      * @param l The first integer
      * @param r The second integer that should divide the first
-     * @return The integer that is the result of the division
+     * @return The integer that is the result of the division, or Integer.MIN_VALUE for division by zero
      */
-  public int op(int l, int r)
-    { return (l/r); }
+    public int op(int l, int r) {
+        if (r == 0) {
+            return Integer.MAX_VALUE;
+        }
+        return (l / r);
+    }
 }
